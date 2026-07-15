@@ -1,5 +1,5 @@
 ---
-name: linkedin-person-school-detail
+name: linkedin-person-school-detail-zh
 description: 从LinkedIn数据中查询学校详情（school detail），通过学校ID获取学校名称、类型、地理位置和社交媒体链接等详细信息。
 metadata: {"version":"1.0.1","homepage":"https://www.upkuajing.com","clawdbot":{"emoji":"🏫","requires":{"bins":["python"],"env":["UPKUAJING_API_KEY"]},"primaryEnv":"UPKUAJING_API_KEY"}}
 ---
