@@ -1,7 +1,7 @@
 ---
 name: linkedin-person-school-detail-zh
 description: 调取 LinkedIn 个人档案里面的院校详细资料，获取目标人员就读院校、求学履历和相关学术信息，辅助外贸拓客以及猎头开展背景调研。
-metadata: {"version":"1.0.1","homepage":"https://www.upkuajing.com","clawdbot":{"emoji":"🏫","requires":{"bins":["python"],"env":["UPKUAJING_API_KEY"]},"primaryEnv":"UPKUAJING_API_KEY"}}
+metadata: {"version":"1.0.4","homepage":"https://www.upkuajing.com","clawdbot":{"emoji":"🏫","requires":{"bins":["python"],"env":["UPKUAJING_API_KEY"]},"primaryEnv":"UPKUAJING_API_KEY"}}
 ---
 
 # 领英学校详情查询
