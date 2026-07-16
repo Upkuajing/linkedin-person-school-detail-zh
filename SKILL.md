@@ -1,143 +1,144 @@
 ---
 name: linkedin-person-school-detail-zh
-description: 从LinkedIn数据中查询学校详情（school detail），通过学校ID获取学校名称、类型、地理位置和社交媒体链接等详细信息。
+description: 调取 LinkedIn 个人档案里面的院校详细资料，获取目标人员就读院校、求学履历和相关学术信息，辅助外贸拓客以及猎头开展背景调研。
 metadata: {"version":"1.0.1","homepage":"https://www.upkuajing.com","clawdbot":{"emoji":"🏫","requires":{"bins":["python"],"env":["UPKUAJING_API_KEY"]},"primaryEnv":"UPKUAJING_API_KEY"}}
 ---
 
-# LinkedIn School Detail Query
+# 领英学校详情查询
 
-Query school detail information from LinkedIn data using the UpKuaJing Open Platform API.
+使用跨境魔方开放平台API从领英数据查询学校的详细信息。
 
-## Overview
+## 概述
 
-This skill provides access to detailed school information from UpKuaJing's LinkedIn data. Given a school ID (sid), it returns the school's name, type, location, and social media URLs. This is a single-record lookup with no pagination needed.
+本技能提供对跨境魔方领英数据学校详情信息的查询。通过学校ID（sid）获取学校的名称、类型、所在地、网址、社交媒体链接等信息。此为单条记录查询，无需翻页。
 
-- The `sid` (school ID) can be obtained from **linkedin-person-education** (education history query) or **linkedin-person-alumni** (alumni query) results
+- `sid`（学校ID）可从 **linkedin-person-education**（教育经历查询）或 **linkedin-person-alumni**（校友查询）结果中获取
 
-## Running Scripts
+## 脚本运行
 
-### Environment Setup
+### 环境准备
 
-1. **Check Python**: `python --version`
-2. **Install dependencies**: `pip install -r requirements.txt`
+1. **检查 Python**：`python --version`
+2. **安装依赖**：`pip install -r requirements.txt`
 
-Script directory: `scripts/*.py`
-Run example: `python scripts/*.py`
+脚本目录：`scripts/*.py`
+运行示例：`python scripts/*.py`
 
-**Important**: Always use direct script invocation like `python scripts/linkedin_school_detail.py`. **Do NOT use** shell compound commands like `cd scripts && python linkedin_school_detail.py`
+**重要**：始终使用直接脚本调用，如 `python scripts/linkedin_school_detail.py`。**不要使用** shell 复合命令如 `cd scripts && python linkedin_school_detail.py`
 
-### School Detail Query (`linkedin_school_detail.py`)
-- **Return granularity**: All school details returned in one response
-- **Use cases**: Lookup school details by ID to get name, location, website, and social media
-- **Examples**:
-  - "Get details of school S_001"
-  - "Look up school information for school ID aue1fd986ee5cb5d906f9d36286714ed33"
-- **Parameters**: See [School Detail API](references/linkedin-school-detail-api.md)
+### 学校详情查询 (`linkedin_school_detail.py`)
+- **返回粒度**：所有学校详情一次性返回
+- **适用场景**：根据学校ID查询学校名称、位置、网址和社交媒体信息
+- **示例**：
+  - "查询S_001学校的详细信息"
+  - "查询学校ID aue1fd986ee5cb5d906f9d36286714ed33的学校信息"
+- **参数**：查看参数说明 [学校详情 API](references/linkedin-school-detail-api.md)
 
-## API Key and Top-up
-
-This skill requires an API key. The API key is stored in the `~/.upkuajing/.env` file:
+## API密钥与充值
+使用此技能需要API密钥。API密钥保存在 `~/.upkuajing/.env` 文件中：
 ```bash
 cat ~/.upkuajing/.env
 ```
-**Example file content**:
+**文件内容示例**：
 ```
 UPKUAJING_API_KEY=your_api_key_here
 ```
-### **API Key Not Set**
-First check if the `~/.upkuajing/.env` file has UPKUAJING_API_KEY;
-If UPKUAJING_API_KEY is not set, prompt the user to choose:
-1. User has one: User provides it (manually add to ~/.upkuajing/.env file)
-2. User doesn't have one: You can apply using the interface (`auth.py --new_key`), the new key will be automatically saved to ~/.upkuajing/.env
-Wait for user selection;
+### **未设置API密钥**
+请先检查 `~/.upkuajing/.env` 文件是否有 UPKUAJING_API_KEY;
+如果未设置 UPKUAJING_API_KEY API密钥，请提示并让用户选择：
+1. 用户有，由用户提供(手动添加到 ~/.upkuajing/.env 文件)
+2. 用户没有，你可使用接口进行申请（`auth.py --new_key`），申请到新密钥后，会自动保存到 ~/.upkuajing/.env
+等待用户选择；
 
-### **Account Top-up**
-When API response indicates insufficient balance, explain and guide user to top up:
-1. Create top-up order (`auth.py --new_rec_order`)
-2. Based on order response, send payment page URL to user, guide user to open URL and pay, user confirms after successful payment;
+### **账户充值**
+如果调用接口响应账户余额不足时，需说明并引导用户进行账户充值：
+1. 创建充值订单（`auth.py --new_rec_order`）
+2. 根据订单响应，发送支付页面URL给用户，引导用户打开地址付款，付款成功后告诉你；
 
-### **Get Account Information**
-Use this script to get account information for UPKUAJING_API_KEY: `auth.py --account_info`
+### **获取账户信息**
+可通过此脚本，获取UPKUAJING_API_KEY对应的账户信息 `auth.py --account_info`
 
-## API Key and UpKuaJing Account
-- Newly applied API key: Register and login at [UpKuaJing Open Platform](https://developer.upkuajing.com/), then bind account
+## API密钥与跨境魔方账号
+- 新申请的API密钥：在[跨境魔方开放平台](https://developer.upkuajing.com/)注册、登录后进行账号绑定
 
-## Fees
+## 费用
 
-**All API calls incur fees**, different interfaces have different billing methods.
+**所有API调用都会产生费用**，不同接口计费方式不同。
 
-**Latest pricing**: Users can visit [Detailed Price Description](https://www.upkuajing.com/web/openapi/price.html)
-Or use: `python scripts/auth.py --price_info` (returns complete pricing for all interfaces)
+**最新价格**：用户可访问 [详细价格说明](https://www.upkuajing.com/web/openapi/price.html)
+或者使用：`python scripts/auth.py --price_info`（返回接口完整定价）
 
-### Query Billing Rules
+### 查询计费规则
 
-Billed by **number of calls**, each query returns the complete school details:
-- Each API call incurs a fee
-- No pagination needed, all data returned in one response
-- **Before execution:**
-  1. Inform user that this query will incur a fee
-  2. Stop, wait for explicit user confirmation in a separate message, then execute script
+按**调用次数**计费，每次查询返回完整的学校详情：
+- 每次API调用产生一次费用
+- 无需翻页，所有数据一次性返回
+- **执行前必须：**
+  1. 告知用户本次查询会产生费用
+  2. 停止，等待用户在独立消息中明确确认后，再执行脚本
 
-### Fee Confirmation Principle
+### 费用确认原则
 
-**Any operation that incurs fees must first inform and wait for explicit user confirmation. Do not execute in the same message as the notification.**
+**任何会产生费用的操作，都必须先告知、等待用户明确确认，不得在告知的同一条消息中直接执行。**
 
-## Workflow
+## 工作流程
 
-### Decision Guide
+### 决策指南
 
-| User Intent | Use API |
-|-------------|---------|
-| "Get details of school S_001" | School Detail Query |
+| 用户意图 | 使用API |
+|---------|--------|
+| "查询S_001学校的详细信息" | 学校详情查询 |
 
-## Usage Examples
+## 使用示例
 
-### Query School Detail
+### 查询学校详情
 
-**User request**: "Get details of school S_001"
+**用户请求**："查询S_001学校的详细信息"
 ```bash
 python scripts/linkedin_school_detail.py --sid S_001
 ```
 
-## Error Handling
+## 错误处理
 
-- **API key invalid/non-existent**: Check `UPKUAJING_API_KEY` in `~/.upkuajing/.env` file
-- **Insufficient balance**: Guide user to top up
-- **Invalid parameters**: **Must first check the corresponding API documentation in references/ directory**, get correct parameter names and formats from documentation, do not guess
+- **API密钥无效/不存在**：检查 `~/.upkuajing/.env` 文件中的 `UPKUAJING_API_KEY`
+- **余额不足**：引导用户充值
+- **参数无效**：**必须先查看 references/ 目录下的对应 API 文档**，从文档中获取正确的参数名称和格式，不要猜测
 
 ### API Documentation Reference
 
-- School Detail: Check [references/linkedin-school-detail-api.md](references/linkedin-school-detail-api.md)
+- 学校详情：查看 [references/linkedin-school-detail-api.md](references/linkedin-school-detail-api.md)
 
-## Best Practices
+## 最佳实践
 
-1. **Check API documentation**:
-   - **Before executing queries, must first check the corresponding API reference documentation**
-   - Check [references/linkedin-school-detail-api.md](references/linkedin-school-detail-api.md)
-   - Do not guess parameter names, get accurate parameter names and formats from documentation
+1. **查看API文档**：
+   - **执行查询前，必须先查看对应的 API 参考文档**
+   - 查看 [references/linkedin-school-detail-api.md](references/linkedin-school-detail-api.md)
+   - 不要猜测参数名称，从文档中获取准确的参数名称和格式
 
-2. **Cross-skill usage**:
-   - The school ID (`sid`) can be obtained from **linkedin-person-education** or **linkedin-person-alumni** query results
+2. **跨技能使用**：
+   - 学校ID（`sid`）可从 **linkedin-person-education** 或 **linkedin-person-alumni** 查询结果中获取
 
-## Notes
-- School detail returns complete information in one response, no pagination needed
-- The school ID (`sid`) can be found in education records (from linkedin-person-education) or alumni records (from linkedin-person-alumni)
-- File paths use forward slashes on all platforms
-- **Prohibit outputting technical parameter format**: Do not display code-style parameters in responses, convert to natural language
-- **Do not** estimate or guess per-call fees — use `python scripts/auth.py --price_info` to get accurate pricing information
-- **Do not** guess parameter names, get accurate parameter names and formats from documentation
+## 注意事项
+- 学校详情一次性返回完整信息，无需翻页
+- 学校ID（`sid`）可从教育经历记录（linkedin-person-education）或校友记录（linkedin-person-alumni）中获得
+- 文件路径在所有平台上都使用正斜杠
+- **禁止输出技术参数格式**：不要在回复中展示代码样式的参数，应将其转换为自然语言
+- **不要估算或猜测每次调用的费用** — 使用 `python scripts/auth.py --price_info` 获取准确定价信息
+- **不要**猜测参数名称，从文档中获取准确的参数名称和格式
 
-## Related Skills
+## 相关技能
 
-Other UpKuaJing skills you might find useful:
+其他您可能会用到的跨境魔方技能：
 
-- linkedin-person-education — Query education history list from LinkedIn data
-- linkedin-person-alumni — Query alumni list from LinkedIn data
-- global-company-person-school-detail — Query school detail from the global company database
-- linkedin-person-search — Search people from LinkedIn data
-- linkedin-company-search — Search companies from LinkedIn data
-- global-company-person-search — Search people from the global company database
-- upkuajing-global-company-people-search — Unified company and people search across all sources
-- upkuajing-contact-info-validity-check — Check contact info validity
-- upkuajing-email-tool — Email verification and sending tool
-- upkuajing-sms-tool — SMS tool
+- linkedin-person-education — 领英教育经历查询
+- linkedin-person-alumni — 领英校友查询
+- global-company-person-school-detail — 全球企业库学校详情查询
+- linkedin-person-search — 领英找人
+- linkedin-company-search — 领英找公司
+- global-company-person-search — 全球企业库找人
+- upkuajing-global-company-people-search — 全来源统一的企业与人物搜索
+- upkuajing-contact-info-validity-check — 联系方式有效性检测
+- phone-validity-check — 电话号码有效性检测
+- email-validity-check — 邮箱地址有效性检测
+- domain-validity-check — 域名有效性检测- upkuajing-email-tool — 邮件验证与发送工具
+- upkuajing-sms-tool — 短信工具
